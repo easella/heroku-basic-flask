@@ -1,9 +1,5 @@
- 
 {
-  "name": "Start on Heroku: Node.js",
-  "description": "A barebones Node.js app using Express 4",
-  "repository": "https://github.com/easella/heroku-basic-flask/",
-  "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/main/public/node.svg",
-  "keywords": ["python", "flask", "heroku"],
-  "image": "heroku/python"
+  "name": "PYWB PyDodge",
+  "description": "Python Wayback Machine",
+  "repository": "https://github.com/easella/heroku-basic-flask"
 }
