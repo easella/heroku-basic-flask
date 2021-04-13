@@ -1,18 +1,20 @@
 from flask import Flask
-from datetime import datetime
+import jinja2
+from requests import get
+from flask_redis import FlaskRedis
 app = Flask(__name__)
+redis_client = FlaskRedis(app)
 
-@app.route('/')
-def homepage():
-    the_time = datetime.now().strftime("%A, %d %b %Y %l:%M %p")
+SITE_NAME = 'https://games.awdrgyjil1234.repl.co/'
 
-    return """
-    <h1>Hello heroku</h1>
-    <p>It is currently {time}.</p>
-
-    <img src="http://loremflickr.com/600/400" />
-    """.format(time=the_time)
-
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def proxy(path):
+  resp = get(f'{SITE_NAME}{path}')
+  if resp.headers.get('content-type'):
+    return resp.content
+  return resp.text
+  
 if __name__ == '__main__':
-    app.run(debug=True, use_reloader=True)
-
+  app.jinja_env.cache = {}
+  app.run(host='0.0.0.0', port=8080)
